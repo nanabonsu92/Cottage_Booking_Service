@@ -39,17 +39,13 @@ public class Booking extends HttpServlet {
         String pathData = this.getServletContext().getRealPath("/WEB-INF/res/cottages.ttl");
         mediator.searchForResult(pathOntology, pathData, places, bedrooms, maxLakeDistance, city, maxCityDistance);
 
-        // Get the results and prepare JSON response
+        // Get the results and prepare JSON array response
         String result = mediator.getResult();
 
         // Set response type to JSON and write output
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
-        out.println("{");
-        out.println("\"name\":\"" + name + "\",");
-        out.println("\"bookingNumber\":\"" + UUID.randomUUID() + "\",");
-        out.println("\"suggestions\":" + result);
-        out.println("}");
+        out.println(result);
         out.flush();
         out.close();
     }
