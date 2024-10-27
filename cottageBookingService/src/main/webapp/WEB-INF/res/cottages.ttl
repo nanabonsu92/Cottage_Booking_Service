@@ -1,0 +1,44 @@
+@prefix : <http://localhost:8080/cottageBookingService/res/cottages.ttl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cottageOntology: <http://localhost:8080/res/cottageOntology.ttl#> .
+
+:hut rdf:type cottageOntology:Cottage ;
+     cottageOntology:closestCity "Helsinki" ;
+     cottageOntology:distanceToClosestCity "8"^^xsd:int ;
+     cottageOntology:distanceToLake "20"^^xsd:int ;
+     cottageOntology:hasAddress "Benktankuja 32" ;
+     cottageOntology:hasBedrooms "4"^^xsd:int ;
+     cottageOntology:hasImgUrl "https://cdn.pixabay.com/photo/2020/03/21/20/03/real-estate-4955087_960_720.jpg"^^xsd:anyURI ;
+     cottageOntology:hasPlaces "22"^^xsd:int .
+
+
+:poolhouse rdf:type cottageOntology:Cottage ;
+           cottageOntology:closestCity "Tampere" ;
+           cottageOntology:distanceToClosestCity "1"^^xsd:int ;
+           cottageOntology:distanceToLake "10"^^xsd:int ;
+           cottageOntology:hasAddress "Mannheimstreet 1" ;
+           cottageOntology:hasBedrooms "1"^^xsd:int ;
+           cottageOntology:hasImgUrl "https://cdn.pixabay.com/photo/2023/05/17/19/19/mannheim-8000879_960_720.jpg"^^xsd:anyURI ;
+           cottageOntology:hasPlaces "3"^^xsd:int .
+
+
+:sandstone rdf:type cottageOntology:Cottage ;
+           cottageOntology:closestCity "Tampere" ;
+           cottageOntology:distanceToClosestCity "4"^^xsd:int ;
+           cottageOntology:distanceToLake "100"^^xsd:int ;
+           cottageOntology:hasAddress "Velholehdenkatu 23" ;
+           cottageOntology:hasBedrooms "3"^^xsd:int ;
+           cottageOntology:hasImgUrl "https://cdn.pixabay.com/photo/2013/12/21/02/55/outhouse-231551_960_720.jpg"^^xsd:anyURI ;
+           cottageOntology:hasPlaces "8"^^xsd:int .
+
+
+:woodenpalace rdf:type cottageOntology:Cottage ;
+              cottageOntology:closestCity "Tampere" ;
+              cottageOntology:distanceToClosestCity "10"^^xsd:int ;
+              cottageOntology:distanceToLake "300"^^xsd:int ;
+              cottageOntology:hasAddress "Pahvitie 234" ;
+              cottageOntology:hasBedrooms "5"^^xsd:int ;
+              cottageOntology:hasImgUrl "https://cdn.pixabay.com/photo/2017/03/27/14/48/abandoned-2179173_960_720.jpg"^^xsd:anyURI ;
+              cottageOntology:hasPlaces "18"^^xsd:int .
+
