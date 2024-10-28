@@ -1,0 +1,30 @@
+{
+  "offers": [
+    {
+      "name": "Jane Doe",
+      "bookingNumber": 12348,
+      "address": "Testikuja 2",
+      "imgUrl": "https://cdn.pixabay.com/photo/2020/03/21/20/03/real-estate-4955087_960_720.jpg",
+      "places": 4,
+      "bedrooms": 2,
+      "distanceToLake": 500,
+      "closestCity": "Tampere",
+      "distanceToCity": 3,
+      "startingDate": "21.10.2025",
+      "endingDate": "30.10.2025"
+    },
+    {
+      "name": "John Doe",
+      "bookingNumber": 46492,
+      "address": "Testitie 462",
+      "imgUrl": "https://cdn.pixabay.com/photo/2013/12/21/02/55/outhouse-231551_960_720.jpg",
+      "places": 23,
+      "bedrooms": 10,
+      "distanceToLake": 20,
+      "closestCity": "Tampere",
+      "distanceToCity": 1,
+      "startingDate": "21.10.2025",
+      "endingDate": "30.10.2025"
+    }
+  ]
+}

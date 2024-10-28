@@ -6,8 +6,6 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.riot.RDFDataMgr;
 
-import java.util.UUID;
-
 public class SWDB {
     private String queryResult = "";
 
@@ -39,7 +37,7 @@ public class SWDB {
         QueryExecution qexec = QueryExecutionFactory.create(query, model);
         ResultSet results = qexec.execSelect();
 
-        // Build JSON array string for the results
+        // Build JSON-like string for the results
         StringBuilder resultBuilder = new StringBuilder("[");
         boolean first = true;
         while (results.hasNext()) {
@@ -55,17 +53,13 @@ public class SWDB {
             RDFNode cityDist = soln.get("cityDist");
 
             resultBuilder.append("{")
-                    .append("\"name\":\"").append("User Name").append("\",")
-                    .append("\"bookingNumber\":").append(UUID.randomUUID().toString().hashCode()).append(",")
                     .append("\"address\":\"").append(address.toString()).append("\",")
                     .append("\"imgUrl\":\"").append(imgUrl.toString()).append("\",")
                     .append("\"places\":").append(place.asLiteral().getInt()).append(",")
                     .append("\"bedrooms\":").append(bedroom.asLiteral().getInt()).append(",")
-                    .append("\"distanceToLake\":").append(lakeDist.asLiteral().getInt()).append(",")
-                    .append("\"closestCity\":\"").append(cityNode.toString()).append("\",")
-                    .append("\"distanceToCity\":").append(cityDist.asLiteral().getInt()).append(",")
-                    .append("\"startingDate\":\"21.10.2025\",") // Static dates as examples
-                    .append("\"endingDate\":\"30.10.2025\"")
+                    .append("\"lakeDistance\":").append(lakeDist.asLiteral().getInt()).append(",")
+                    .append("\"city\":\"").append(cityNode.toString()).append("\",")
+                    .append("\"cityDistance\":").append(cityDist.asLiteral().getInt())
                     .append("}");
             first = false;
         }
