@@ -1,7 +1,7 @@
 @prefix : <http://localhost:8080/cottageBookingService/res/cottages.ttl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix cottageOntology: <http://localhost:8080/res/cottageOntology.ttl#> .
+@prefix cottageOntology: <http://localhost:8080/cottageBookingService/res/cottageOntology.ttl#> .
 
 :hut rdf:type cottageOntology:Cottage ;
      cottageOntology:closestCity "Helsinki" ;

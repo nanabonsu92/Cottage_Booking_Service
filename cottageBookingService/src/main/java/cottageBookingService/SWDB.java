@@ -15,23 +15,26 @@ public class SWDB {
         Model model = ModelFactory.createDefaultModel();
         RDFDataMgr.read(model, pathOntology);
         RDFDataMgr.read(model, pathData);
-
+     
+        
         // Define SPARQL query string
         String queryString = "PREFIX : <http://localhost:8080/cottageBookingService/res/cottageOntology.ttl#> " +
-                "SELECT ?address ?imgUrl ?places ?bedrooms ?lakeDist ?city ?cityDist " +
-                "WHERE { " +
-                "    ?cottage rdf:type :Cottage ;" +
-                "             :hasAddress ?address ;" +
-                "             :hasImgUrl ?imgUrl ;" +
-                "             :hasPlaces ?places ;" +
-                "             :hasBedrooms ?bedrooms ;" +
-                "             :distanceToLake ?lakeDist ;" +
-                "             :closestCity ?city ;" +
-                "             :distanceToClosestCity ?cityDist ." +
-                "    FILTER (?places >= " + places + " && ?bedrooms >= " + bedrooms + " && ?lakeDist <= " + maxLakeDistance +
-                " && ?cityDist <= " + maxCityDistance + " && str(?city) = \"" + city + "\")" +
-                "}";
-
+        		"SELECT ?cottage ?address ?imgUrl ?places ?bedrooms ?lakeDist ?city ?cityDist " +
+        		"WHERE { " +
+        		"    ?cottage a :Cottage ;" +
+        		"             :hasAddress ?address ;" +
+        		"             :hasImgUrl ?imgUrl ;" +
+        		"             :hasPlaces ?places ;" +
+        		"             :hasBedrooms ?bedrooms ;" +
+        		"             :distanceToLake ?lakeDist ;" +
+        		"             :closestCity ?city ;" +
+        		"             :distanceToClosestCity ?cityDist ." +
+        		"    FILTER (?places >= " + places + " && ?bedrooms >= " + bedrooms + " && ?lakeDist <= " + maxLakeDistance +
+        		" && ?cityDist <= " + maxCityDistance + " && str(?city) = \"" + city + "\")" +
+        		"}";
+        
+        
+        
         // Execute SPARQL query
         Query query = QueryFactory.create(queryString);
         QueryExecution qexec = QueryExecutionFactory.create(query, model);
@@ -43,7 +46,7 @@ public class SWDB {
         while (results.hasNext()) {
             if (!first) resultBuilder.append(",");
             QuerySolution soln = results.nextSolution();
-
+            
             RDFNode address = soln.get("address");
             RDFNode imgUrl = soln.get("imgUrl");
             RDFNode place = soln.get("places");
@@ -51,10 +54,9 @@ public class SWDB {
             RDFNode lakeDist = soln.get("lakeDist");
             RDFNode cityNode = soln.get("city");
             RDFNode cityDist = soln.get("cityDist");
-
             resultBuilder.append("{")
                     .append("\"address\":\"").append(address.toString()).append("\",")
-                    .append("\"imgUrl\":\"").append(imgUrl.toString()).append("\",")
+                    .append("\"imgUrl\":\"").append(removeType(imgUrl.toString())).append("\",")
                     .append("\"places\":").append(place.asLiteral().getInt()).append(",")
                     .append("\"bedrooms\":").append(bedroom.asLiteral().getInt()).append(",")
                     .append("\"lakeDistance\":").append(lakeDist.asLiteral().getInt()).append(",")
@@ -62,11 +64,16 @@ public class SWDB {
                     .append("\"cityDistance\":").append(cityDist.asLiteral().getInt())
                     .append("}");
             first = false;
+            
         }
         resultBuilder.append("]");
         queryResult = resultBuilder.toString();
 
         qexec.close();
+    }
+    
+    private String removeType(String value) {
+    	return value.split("\\^\\^")[0];
     }
 
     // Return the result as a JSON string
