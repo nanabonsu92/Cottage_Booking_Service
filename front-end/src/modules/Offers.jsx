@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl = 'http://localhost:3001/offers'
+// const baseUrl = '/Booking' // for production
+ const baseUrl = 'http://localhost:3001/offers' //for json server
 
 const getOffers = (params) => {
   const config = {
@@ -8,7 +9,8 @@ const getOffers = (params) => {
     }
   
   return axios.get(baseUrl, config).then(response => {
-    //console.log('koko resp', response)
+    
+  //console.log('koko resp', response)
     
     return response.data
   })

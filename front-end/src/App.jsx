@@ -5,7 +5,7 @@ import BookingForm from './BookingForm'
 import offerService from './modules/Offers'
 
 function App() {
-  const [offers, setOffers] = useState([])
+  const [offers, setOffers] = useState(undefined)
 
   const handleSubmit = (event) => {
     event.preventDefault()

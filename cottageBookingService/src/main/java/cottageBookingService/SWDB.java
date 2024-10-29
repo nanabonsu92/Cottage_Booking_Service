@@ -1,5 +1,11 @@
 package cottageBookingService;
 
+import java.text.DateFormat;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -10,7 +16,7 @@ public class SWDB {
     private String queryResult = "";
 
     // Search for cottages that meet booking requirements
-    public void searchForResult(String pathOntology, String pathData, int places, int bedrooms, int maxLakeDistance, String city, int maxCityDistance) {
+    public void searchForResult(String pathOntology, String pathData, int places, int bedrooms, int maxLakeDistance, String city, int maxCityDistance, String startDate, int days) {
         // Load both RDF models from files
         Model model = ModelFactory.createDefaultModel();
         RDFDataMgr.read(model, pathOntology);
@@ -39,7 +45,9 @@ public class SWDB {
         Query query = QueryFactory.create(queryString);
         QueryExecution qexec = QueryExecutionFactory.create(query, model);
         ResultSet results = qexec.execSelect();
-
+        
+        // Dealing with the dates
+        String endDate = addDays(startDate, days);
         // Build JSON-like string for the results
         StringBuilder resultBuilder = new StringBuilder("[");
         boolean first = true;
@@ -56,6 +64,8 @@ public class SWDB {
             RDFNode cityDist = soln.get("cityDist");
             resultBuilder.append("{")
                     .append("\"address\":\"").append(address.toString()).append("\",")
+                    .append("\"startingDate\":\"").append(startDate).append("\",")
+                    .append("\"endingDate\":\"").append(endDate).append("\",")
                     .append("\"imgUrl\":\"").append(removeType(imgUrl.toString())).append("\",")
                     .append("\"places\":").append(place.asLiteral().getInt()).append(",")
                     .append("\"bedrooms\":").append(bedroom.asLiteral().getInt()).append(",")
@@ -70,6 +80,24 @@ public class SWDB {
         queryResult = resultBuilder.toString();
 
         qexec.close();
+    }
+    
+    //Calculating endDate offers
+    private String addDays(String date, int days) {
+    	DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    	Date startDate;
+    	try {
+    		startDate = dateFormat.parse(date);
+    	} catch(Exception e) {
+    		//TODO change to throw exception
+    		return "invalid";
+    	}
+    	
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.setTime(startDate);
+    	calendar.add(Calendar.DATE, days);
+    	Date dateToReturn = calendar.getTime();
+		return dateFormat.format(dateToReturn);
     }
     
     private String removeType(String value) {
