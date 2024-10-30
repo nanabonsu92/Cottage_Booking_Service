@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const baseUrl = '/Booking' // for production
- const baseUrl = 'http://localhost:3001/offers' //for json server
+ const baseUrl = '/cottageBookingService/Booking' // for production
+ //const baseUrl = 'http://localhost:3001/offers' //for json server
 
 const getOffers = (params) => {
   const config = {
