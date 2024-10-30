@@ -1,7 +1,10 @@
 import axios from "axios";
 
- const baseUrl = '/cottageBookingService/Booking' // for production
- //const baseUrl = 'http://localhost:3001/offers' //for json server
+ const baseUrl = import.meta.env.PROD
+  ? '/cottageBookingService/Booking' 
+  : 'http://localhost:3001/offers'
+
+
 
 const getOffers = (params) => {
   const config = {
@@ -9,9 +12,6 @@ const getOffers = (params) => {
     }
   
   return axios.get(baseUrl, config).then(response => {
-    
-  //console.log('koko resp', response)
-    
     return response.data
   })
 }

@@ -1,22 +1,21 @@
 const CottageOffer = ({offer}) => {
-  //console.log(offer)
     return  (
         <div style={styles.container}>
           <img style={styles.image} src={offer.imgUrl} />
           <div style={styles.text}>
+            <div>name: {offer.name}</div>
+            <div>booking number: {offer.bookingNumber}</div>
             <div>address: {offer.address}</div>
             <div>places: {offer.places}</div>
             <div>bedrooms: {offer.bedrooms}</div>
-            <div>distance to nearest lake: {offer.lakeDistance}</div>
+            <div>distance to nearest lake: {offer.lakeDistance} m</div>
             <div>closest city: {offer.city}</div>
-            <div>distance to the city: {offer.cityDistance}</div>
+            <div>distance to the city: {offer.cityDistance} km</div>
             <div>booking period: {offer.startingDate} - {offer.endingDate}</div>
           </div>
         </div>
     )
   }
-//  <div>name: {offer.name}</div>
-//  <div>booking number: {offer.bookingNumber}</div>
 
 const styles = {
   container: {

@@ -16,7 +16,7 @@ public class SWDB {
     private String queryResult = "";
 
     // Search for cottages that meet booking requirements
-    public void searchForResult(String pathOntology, String pathData, int places, int bedrooms, int maxLakeDistance, String city, int maxCityDistance, String startDate, int days) {
+    public void searchForResult(String pathOntology, String pathData, int places, int bedrooms, int maxLakeDistance, String city, int maxCityDistance, String startDate, int days, String name) {
         // Load both RDF models from files
         Model model = ModelFactory.createDefaultModel();
         RDFDataMgr.read(model, pathOntology);
@@ -63,6 +63,8 @@ public class SWDB {
             RDFNode cityNode = soln.get("city");
             RDFNode cityDist = soln.get("cityDist");
             resultBuilder.append("{")
+            		.append("\"name\":\"").append(name).append("\",")
+            		.append("\"bookingNumber\":\"").append(generateBookingNumber()).append("\",")
                     .append("\"address\":\"").append(address.toString()).append("\",")
                     .append("\"startingDate\":\"").append(startDate).append("\",")
                     .append("\"endingDate\":\"").append(endDate).append("\",")
@@ -82,6 +84,10 @@ public class SWDB {
         qexec.close();
     }
     
+    private String generateBookingNumber() {
+    	return String.valueOf(10000 + (int)(89999 * Math.random()));
+    }
+    
     //Calculating endDate offers
     private String addDays(String date, int days) {
     	DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -90,7 +96,7 @@ public class SWDB {
     		startDate = dateFormat.parse(date);
     	} catch(Exception e) {
     		//TODO change to throw exception
-    		return "invalid";
+    		return "invalid date";
     	}
     	
     	Calendar calendar = Calendar.getInstance();
