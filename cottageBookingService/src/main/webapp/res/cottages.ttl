@@ -20,7 +20,9 @@
            cottageOntology:hasAddress "Mannheimstreet 1" ;
            cottageOntology:hasBedrooms "1"^^xsd:int ;
            cottageOntology:hasImgUrl "https://cdn.pixabay.com/photo/2023/05/17/19/19/mannheim-8000879_960_720.jpg"^^xsd:anyURI ;
-           cottageOntology:hasPlaces "3"^^xsd:int .
+           cottageOntology:hasPlaces "3"^^xsd:int ;
+           cottageOntology:hasBooking :booking1 ;
+           cottageOntology:hasBooking :booking2.
 
 
 :sandstone rdf:type cottageOntology:Cottage ;
@@ -42,3 +44,10 @@
               cottageOntology:hasImgUrl "https://cdn.pixabay.com/photo/2017/03/27/14/48/abandoned-2179173_960_720.jpg"^^xsd:anyURI ;
               cottageOntology:hasPlaces "18"^^xsd:int .
 
+:booking1 rdf:type cottageOntology:Booking ;
+              cottageOntology:hasStartDate "19.11.2025"^^xsd:string ;
+              cottageOntology:hasEndDate "21.11.2025"^^xsd:string .
+
+:booking2 rdf:type cottageOntology:Booking ;
+              cottageOntology:hasStartDate "15.11.2025"^^xsd:string ;
+              cottageOntology:hasEndDate "17.11.2025"^^xsd:string .

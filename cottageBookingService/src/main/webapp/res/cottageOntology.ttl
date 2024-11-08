@@ -9,6 +9,16 @@
 <http://localhost:8080/cottageBookingService/res/cottageOntology.ttl> rdf:type owl:Ontology .
 
 #################################################################
+#    Object Properties
+#################################################################
+
+###  http://localhost:8080/cottageBookingService/res/cottageOntology.ttl#hasBooking
+:hasBooking rdf:type owl:ObjectProperty ;
+            rdfs:domain :Cottage ;
+            rdfs:range :Booking .
+
+
+#################################################################
 #    Data properties
 #################################################################
 
@@ -32,6 +42,13 @@
 :hasBedrooms rdf:type owl:DatatypeProperty .
 
 
+###  http://localhost:8080/cottageBookingService/res/cottageOntology.ttl#hasEndDate
+:hasEndDate rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain :Booking ;
+            rdfs:range xsd:string .
+
+
 ###  http://localhost:8080/cottageBookingService/res/cottageOntology.ttl#hasImgUrl
 :hasImgUrl rdf:type owl:DatatypeProperty .
 
@@ -40,9 +57,20 @@
 :hasPlaces rdf:type owl:DatatypeProperty .
 
 
+###  http://localhost:8080/cottageBookingService/res/cottageOntology.ttl#hasStartDate
+:hasStartDate rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :Booking ;
+              rdfs:range xsd:string .
+
+
 #################################################################
 #    Classes
 #################################################################
+
+###  http://localhost:8080/cottageBookingService/res/cottageOntology.ttl#Booking
+:Booking rdf:type owl:Class .
+
 
 ###  http://localhost:8080/cottageBookingService/res/cottageOntology.ttl#Cottage
 :Cottage rdf:type owl:Class .

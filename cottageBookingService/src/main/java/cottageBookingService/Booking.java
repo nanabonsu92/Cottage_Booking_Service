@@ -35,10 +35,9 @@ public class Booking extends HttpServlet {
     	int maxLakeDistance = Integer.parseInt(request.getParameter("maxDistanceToLake"));
     	String city = request.getParameter("city");
     	int maxCityDistance = Integer.parseInt(request.getParameter("maxDistanceToCity"));
-    	
     	int days = Integer.parseInt(request.getParameter("days"));
     	String startDateString = request.getParameter("startingDate");
-    	
+    	int maxShift = Integer.parseInt(request.getParameter("maxDaysShift"));
     	
     	
         // Instantiate SWDB and perform the query
@@ -47,7 +46,7 @@ public class Booking extends HttpServlet {
         String pathData = this.getServletContext().getRealPath("/res/cottages.ttl");
         
         
-        mediator.searchForResult(pathOntology, pathData, places, bedrooms, maxLakeDistance, city, maxCityDistance, startDateString, days, name);
+        mediator.searchForResult(pathOntology, pathData, places, bedrooms, maxLakeDistance, city, maxCityDistance, startDateString, days, name, maxShift);
 
         // Get the results and prepare JSON response
         String result = mediator.getResult();
