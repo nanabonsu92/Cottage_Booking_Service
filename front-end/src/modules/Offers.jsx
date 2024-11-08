@@ -12,6 +12,8 @@ const getOffers = (params) => {
     }
   
   return axios.get(baseUrl, config).then(response => {
+    console.log(response);
+    
     return response.data
   })
 }
